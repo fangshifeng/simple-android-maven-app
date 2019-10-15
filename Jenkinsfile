@@ -17,7 +17,7 @@ pipeline {
         branch 'master'
       }     
       steps {
-        sh './gradlew clean assembleDevDebug'
+        sh './gradlew clean assembleDebug'
       }
       post {
         failure {
