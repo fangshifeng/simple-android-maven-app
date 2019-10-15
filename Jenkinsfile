@@ -4,33 +4,18 @@ pipeline {
       image 'maven:3-alpine'
       args '-v /root/.m2:/root/.m2'
     }
-
   }
   stages {
-    stage('Build') {
+    stage('Build Develop APK') {     
       steps {
-        sh 'mvn -B -DskipTests clean package'
+	echo 'Hello,Maven'
+        sh 'mvn --version'
       }
     }
-    stage('Build Develop APK') {
-      when {
-        branch 'master'
-      }     
+    stage('Example Test') { 
       steps {
-        sh './gradlew clean assembleDebug'
-      }
-      post {
-        failure {
-          echo "Build Develop APK Failure!"
-        }
-        success {
-          echo "Build Develop APK Success!"
-        }
-      }
-    }
-    stage('Deliver') { 
-      steps {
-          sh './jenkins/scripts/deliver.sh' 
+	echo 'Hello JDK'
+        sh 'java -version' 
       }
     }
   }
