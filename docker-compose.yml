@@ -1,9 +1,14 @@
 version: '3'
 jenkins:
     image: jenkins/jenkins:lts
+    container_name: jenkins-blueocean
+    environment:
+        - ANDROID_HOME=/Users/fangshifeng/Library/Android/sdk
+        - ANDROID_SDK_HOME=/var/jenkins_home/tmp/android
+        - GRADLE_USER_HOME=/var/jenkins_home/tools/gradle
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-        - /Users/fangshifeng/Documents/jenkins_data:/var/jenkins_home 
+        - /Users/fangshifeng/Documents/docker_jenkins_android:/var/jenkins_home 
     ports:
         - "8080:8080"
         - "50000:50000"

@@ -12,13 +12,19 @@ pipeline {
         sh 'mvn -B -DskipTests clean package'
       }
     }
-    stage('Test') {
+    stage('Build Develop APK') {
+      when {
+        branch 'master'
+      }     
       steps {
-        sh 'mvn test'
+        sh './gradlew clean assembleDevDebug'
       }
       post {
-        always {
-          junit 'target/surefire-reports/*.xml'
+        failure {
+          echo "Build Develop APK Failure!"
+        }
+        success {
+          echo "Build Develop APK Success!"
         }
       }
     }
