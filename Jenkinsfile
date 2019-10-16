@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build Develop APK') {     
       steps {
-        sh './gradlew clean assembleDebug'
+        sh 'clean assembleDebug'
       }
       post {
         failure {
