@@ -5,18 +5,29 @@ pipeline {
       args '-v /root/.m2:/root/.m2'
     }
   }
+
   stages {
     stage('Build Develop APK') {     
       steps {
-	echo 'Hello,Maven'
-        sh 'mvn --version'
+        sh './gradlew clean assembleDebug'
+      }
+      post {
+        failure {
+          echo "Duild Develop APK Failure!"
+        }
+        success {
+          echo "Build Develop APK Success"
+        }
       }
     }
+
     stage('Example Test') { 
       steps {
-	echo 'Hello JDK'
+        echo 'Hello JDK'
         sh 'java -version' 
       }
     }
+
+
   }
 }
